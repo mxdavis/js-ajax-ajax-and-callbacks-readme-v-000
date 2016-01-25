@@ -13,7 +13,7 @@ $(document).ready(function(){
       // debugger;
        // $(".result").text();
     },
-    failure: function(){
+    error: function(){
       alert("this failed");
     }
   });

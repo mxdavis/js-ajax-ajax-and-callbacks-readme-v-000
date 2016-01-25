@@ -44,7 +44,7 @@ we tell it what to get, and then we tell it what to do once it's finished.
 
 like putting food in the microwave, you don't freeze until it's finished heating your food, you probably play on your phone, look at instagram, maybe watch some TV or do more work on learn. you go on and do other things until your food is heated, and then you remove it from the microwave and eat it (the success function)
 
-if failure - failure callbacks
+if error - error callbacks
 
 show more examples with code after - console.log
 
