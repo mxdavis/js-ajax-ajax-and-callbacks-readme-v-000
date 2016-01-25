@@ -3,6 +3,8 @@
 ## Objectives
 + Explain what an API is and why it's used
 + Explain what Ajax is and why it's used
++ Make a `get` request using Ajax to append text to a page
++ Explain what a callback is and why Ajax runs asynchronously
 
 ## Intro
 
