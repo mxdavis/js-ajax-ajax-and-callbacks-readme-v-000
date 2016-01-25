@@ -15,9 +15,7 @@ Instead of relying on a gem or library to do the heavy lifting for us, we can us
 
 ## API Basics
 
-Underneath the hood of all those gems, a request as been made to the API (to a specific url) and then the app responds to that request with JSON. 
-
-define JSON - show an example of JSON - how to access data in JSON just like arrays and hashes
+Underneath the hood of all those gems, a request as been made to the API (to a specific url) and then the app responds to that request with the data.
 
 use postman chrome extension or app?? to make API request to demonstrate getting back JSON and manipulating it (screenshots) from the Github API
 
@@ -42,7 +40,7 @@ it knows it will take a while to GET the data, so while it's doing it, it will c
 
 we tell it what to get, and then we tell it what to do once it's finished. 
 
-like putting food in the microwave, you don't freeze until it's finished heating your food, you probably play on your phone, look at instagram, maybe watch some TV or do more work on learn. you go on and do other things until your food is heated, and then you remove it from the microwave and eat it (the success function)
+like putting food in the microwave, you personally don't stand and wait until it's finished heating your food, you probably play on your phone, look at instagram, maybe watch some TV or do more work on learn. you go on and do other things until your food is heated, and then you remove it from the microwave and eat it (the success function)
 
 if error - error callbacks
 
