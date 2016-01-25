@@ -46,13 +46,6 @@ if error - error callbacks
 
 show more examples with code after - console.log
 
-can be invoked automatically:
-
-```$.getJSON({
-  url: url,
-  dataType: "jsonp",
-  success: function
-})
 
 without passing it an argumnet- gets it automagically
 
