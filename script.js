@@ -12,7 +12,9 @@ $(document).ready(function(){
       alert("success!")
       // debugger;
        // $(".result").text();
-
+    },
+    failure: function(){
+      alert("this failed");
     }
   });
 });
