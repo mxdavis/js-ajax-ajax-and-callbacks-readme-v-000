@@ -1,52 +1,167 @@
 # Ajax and Callbacks
-
 ## Objectives
-+ Explain what an API is and why it's used
-+ Explain what Ajax is and why it's used
-+ Make a `get` request using Ajax to append text to a page
-+ Explain what a callback is and why Ajax runs asynchronously
+- Explain what an API is and why it's used
+- Explain what Ajax is and why it's used
+- Make a get request using Ajax to append text to a page
+- Explain what a callback is and why Ajax runs asynchronously
 
-## Intro
+## Intro (half done)
 
-So far, when you've been using an API, you've been using a gem to access the API endpoints. Basically, you're relying on work someone else did to access clean data in the desired format.
+So far, you've been using a gem to access a web API.  Gems are responsible for handling all of the nitty-gritty.  They allow us to easily access/modify the data that's important to us. But what happens if the API we want to use doesn't have an associated gem?  We will need to handle everything ourselves.  If that's the case, we better learn more about what an API really is!
 
-Instead of relying on a gem or library to do the heavy lifting for us, we can use Ajax to do it ourselves, without having a page refresh. 
+## API Basics (done)
+
+We interact with web APIs through a set of urls. Each url defines a resource that we access.  The benefit of using a gem is that we don't have to build these urls ourselves.  The gems wrap the necessary code into neat little packages.  When we ask a gem for data, a gem will make a request to the API, handle the response and parse the data into a format we can use. Instead of relying on the magic of gems let's get our hands dirty.
+
+### Postman and the GitHub API (done)
+Let's see what's actually happening when a gem makes a request to an API. Ok, but how do we do this without a gem? We could write some ruby code, but let's try using a tool called Postman. Postman is an easy to use Chrome extension that lets us make different web requests.  It easily allows us to interact with web APIs. For our exercise, we are going to work with the GitHub API to retrieve information about the Ruby on Rails GitHub repository. To get started we need to setup Postman.
+
+#### Postman Installation (almost done)
+
+1. Visit https://www.getpostman.com and install the Chrome extension.
+2. Once you have it installed, open Postman from the Chrome Apps menu.
+3. Skip the signup and go straight to the app. 
+
+Great!  Now you're all set up to make your own API requests.  As you know, Rails is a large open source project with thousands of contributors.  Those contributors make a hefty amount of commits.  The GitHub API allows us to retrieve the list of commits made to the Rails repository.
+
+At this point Postman should be loaded and ready to go:
+
+* Enter **https://api.github.com/repos/rails/rails/commits** in the URL textbox.
+* Click the **Send** button.
+
+Once the request finishes, Postman will display the results.  Does this format look familiar?  If you said JSON then give yourself a pat on the back. What we're looking at is a JSON list of all the commits made to the Rails repository.  Each hash in the array has an author key.  Do you recognize any of the commiters?  If not, let's try to narrow the results returned from the GitHub API.
+
+GitHub exposes a way for us to do this using HTML parameters.  By changing the URL slightly to include the `author` parameter, we can ask the GitHub API to return only the commits made by DHH (bonus points if you know who this is!).
+
+Let's add ```?author=DHH``` to the end of the url and see how the results change.
+
+Go back to Postman and perform the following:
+
+* Enter **https://api.github.com/repos/rails/rails/commits?author=DHH**
+* Click the **Send** button.
 
 
-## API Basics
+** Maybe link this back to rails or a gem example **
 
-Underneath the hood of all those gems, a request as been made to the API (to a specific url) and then the app responds to that request with the data.
+As you can see, getting data from an API is pretty easy but we haven't really said what an API is.
 
-use postman chrome extension or app?? to make API request to demonstrate getting back JSON and manipulating it (screenshots) from the Github API
+```ruby
+github_commits = Github::Client::Repos::Commits.new
+github_commits.all(user: 'rails', repo: 'rails')
+github_commits.all(user: 'rails', repo: 'rails', author: 'DHH')
+```
 
-theoretical definition of API
+## Defining API (done)
+
+For the purpose of this lesson, we are mostly concerned with web APIs.  But the term API actually has a more broad meaning.
+
+> In computer programming, an application programming interface (API) is a set of routines, protocols, and tools for building software and applications. - Wikipedia
+
+In its simplest form, an API in relation to Object Oriented programming is a class and the list of methods we define.  When creating a class, we are defining a guidebook on how to interact with other parts of the code.  We get to decide which methods and variables are public or private, essentially controlling how to interact with the class.  When we apply this concept to the web, we get web APIs like the GitHub API and Twitter API. From our Postman experiment, we saw how GitHub provides a way for us interact with the data on their system. Just like how a class provides a set of public methods to interact with, web APIs provide us with urls. The list of urls that GitHub provides on https://developer.github.com/v3 act as the public methods into their system.  The developers that created the API control which resources they want to share and who has access to them. 
 
 ## Ajax
 
-describe what ajax is and what it's used for
+*** SOMETHING HERE to make it flow better ***
 
-ajax communicates with database without need for page refresh - helps with single page applications
+Asynchrounous Javascript and XML (Ajax) is a technique that is used in web applications.  It provides a way for content to be retrieved from a server and displayed without having to refresh the entire page.  Remember in your **blank application** where you had to create a list of **objects**?  Each time we filled out the form and clicked on **create**, the web browser would have to refresh the entire page to see the results sent back from our server.
 
-use AJAX `get` method to retrieve some text from `index/sentence.html`  and display the text in index.html
+Single page applications provide a better user experience by allowing users to manipulate data on the server and see the results without having to refresh the page.  This is the power of Ajax in action.  In the background, requests are made to a web API using JavaScript.  As developers we can then choose to alter the displayed HTML based on the responses from the web API.
 
-use `python -m SimpleHTTPServer` to serve page to make request
+Let's try an example. To start, create a folder on your computer called ```example```. Inside that folder create another folder called ```html```. Now create a file named ```index.html```, ```script.js``` and ```html/sentence.html```. Finally add the following to each file.
 
- 
-## Callbacks
+#### index.html
+```html
+<!doctype html>
+<head>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js"></script>
+    <script src="script.js"></script>
+</head>
+<body>
+  <p id="sentences">
+    Loading our page...
+  </p>
+</body>
+```
 
-ajax follows an asynchronous pattern, the get and post requests executes the success code block only when it gets a response.
+#### html/sentence.html
+```html
+<p>Ajax is a brand of cleaning products, introduced by Colgate-Palmolive in 1947 for a powdered household and industrial cleaner.</p>
+<p>It was one of the company's first major brands.</p>
+```
 
-it knows it will take a while to GET the data, so while it's doing it, it will continue on with the rest of the code, and then execute the success block WHEN it's successful.
+#### javascript.js
+```javascript
+// We should wait for the page to load before running our ajax request
+$(document).ready(function(){
+  // Now we start the Ajax Get request. The first parameter is the URL with the data.
+  // The second parameter is a function that handles the response.
+  $.get("html/sentence.html", function(response) {
+    // Here we are getting the element on the page with the id of sentences and
+    // insert the response
+    $("#sentences").html(response);
+  });
+});
+```
+Using your terminal run the following command from inside the examples folder.
 
-we tell it what to get, and then we tell it what to do once it's finished. 
+```
+$ python -m SimpleHTTPServer
+```
 
-like putting food in the microwave, you personally don't stand and wait until it's finished heating your food, you probably play on your phone, look at instagram, maybe watch some TV or do more work on learn. you go on and do other things until your food is heated, and then you remove it from the microwave and eat it (the success function)
+This starts a simple server that will serve our files over HTTP. Browse to [http://localhost:8000](http://localhost:8000/) and watch as the Ajax request is made and the new data is added to our web page. Pretty cool! We used the power of Ajax to load data from the ```html/sentence.html```. This same idea can be applied to calling the GitHub API or our Rails application.
 
-if error - error callbacks
+##Callbacks
+Ajax follows an asynchronous pattern which makes them non-blocking. This means we don't sit around and wait for the request to finish before running the rest of our code. We set callbacks and then fire and forget. When the request is complete, the callbacks are responsible for deciding what to do with the returned data.
 
-show more examples with code after - console.log
+If we look at our last example, the Ajax request completed very quick but this won't always be the case. If we request data from a slow server over a slow internet connection, it might take multiple seconds to get a response. Using a callback allows our code to make our request and continue doing other things until the request completes.
+
+To make this concept stick, let's look at a real world example. When you put food into a microwave, you don't stand there and wait for the food to finish cooking. You probably pick up your phone, look at Instagram, read some text messages and of course, work on [Learn](https://learn.co). Basically, you are doing other things while the microwave takes care of cooking your food. When the food is cooked, the microwave beeps and you remove the food and eat it. This final step of removing the food and eating it is exactly how our callbacks work.
+
+## Handling Problems
+So far, we have been dealing with succesful API requests. But things don't always go according to plan.  What happens if the API we are using doesn't respond? Or if we attempt to retrieve a resource that doesn't exist?
+
+This can happen when API requests are based on user input.  Let's go back to the GitHub API where we are retrieving commits.  Imagine we want to retrieve a specific commit using a SHA.
+
+Postman:
+https://api.github.com/repos/rails/rails/commits?sha=82885325e04d78fb7ec608a4670164d842d23078
+Returns success
+
+Postman error:
+https://api.github.com/repos/rails/rails/commits?sha=fake-SHA
+Returns a 404 not found
+
+A good developer will make sure to handle these unexpected events gracefully when using Ajax. We can provide multiple callbacks when using jQuery: one to handle a successful response and one to handle when an error occurs.
+
+```javascript
+$.get("this_doesnt_exist.html", function(data) {
+  // This will not be called because the .html file request doesn't exist
+})
+.fail(function(error) {
+  // This is called when an error occurs
+  console.log('Something went wrong: ' + error);
+});
+```
+
+We chained an additional call to ```fail``` on the end of our request. We passed a function to the method which will run only if an error occurs. In our example we logged the error to the console, but in real world situation you might want to try to fix the issue or inform the user.
+
+This is another example of how we could use jQuery to perform an Ajax request.
+
+**without passing it an argumnet- gets it automagically**
+```javascript
+var url = "https://api.github.com/repos/rails/rails/commits?sha=82885325e04d78fb7ec608a4670164d842d23078";
+
+$.get(url)
+  .done(function(data) {
+    console.log("Done");
+    console.log(data);
+  });
+
+```
+
+Note: The callback that gets passed into `.done`  gets `data` as an argument.  `data` represents the response returned from the API. jQuery handles passing in that `data` object to the callbacks.  This is essential to our fire and forget technique.  We don't have to sit around and wait for the API to give us a response.  Instead, we tell jQuery that when it receives a response to please pass it along to our callbacks so they can handle it accordingly.
+
+##Resources
+* https://en.wikipedia.org/wiki/Application_programming_interface
+* https://api.jquery.com/jquery.get/
 
 
-without passing it an argumnet- gets it automagically
-
-## Resources
