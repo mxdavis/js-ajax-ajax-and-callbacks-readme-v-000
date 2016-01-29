@@ -50,3 +50,4 @@ show more examples with code after - console.log
 without passing it an argumnet- gets it automagically
 
 ## Resources
+<p data-visibility='hidden'>View <a href='https://learn.co/lessons/js-ajax-callbacks-readme' title='Ajax and Callbacks'>Ajax and Callbacks</a> on Learn.co and start learning to code for free.</p>
