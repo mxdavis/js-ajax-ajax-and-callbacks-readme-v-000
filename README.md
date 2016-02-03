@@ -41,8 +41,6 @@ Go back to Postman and perform the following:
 * Click the **Send** button.
 
 
-** Maybe link this back to rails or a gem example **
-
 As you can see, getting data from an API is pretty easy but we haven't really said what an API is.
 
 ```ruby
