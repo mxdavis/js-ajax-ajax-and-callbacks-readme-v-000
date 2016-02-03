@@ -106,7 +106,9 @@ Using your terminal run the following command from inside the examples folder.
 $ python -m SimpleHTTPServer
 ```
 
-This starts a simple server that will serve our files over HTTP. Browse to [http://localhost:8000](http://localhost:8000/) and watch as the Ajax request is made and the new data is added to our web page. Pretty cool!  We used the power of Ajax to load data from the `html/sentence.html`. This same idea can be applied to calling the GitHub API or our Rails application. This might all happen too quick to really notice anything so you may want to have your terminal window side by side with the browser window. This way you can see the request hit our server.
+This starts a simple server that will serve our files over HTTP. You need to start a server instead of just opening up `index.html` in the browser because of the browser enforced same-origin policy. To prevent security risks, the browser enforces a same origin policy. A different origin can be interpreted as a different domain, different protocol, and a different port. And Ajax request makes an HTTP request, while right clicking to open `index.html` in the browser is a `fil://` protocol as opposed to `http://`. You need to start a server to guarantee the protocols are the same.
+
+Browse to [http://localhost:8000](http://localhost:8000/) and watch as the Ajax request is made and the new data is added to our web page. Pretty cool!  We used the power of Ajax to load data from the `html/sentence.html`. This same idea can be applied to calling the GitHub API or our Rails application. This might all happen too quick to really notice anything so you may want to have your terminal window side by side with the browser window. This way you can see the request hit our server.
 
 ##Callbacks
 If we look at our last example, the Ajax request completed very quick but this won't always be the case. If we request data from a slow server over a slow internet connection, it might take multiple seconds to get a response. Using a callback allows our code to make our request and continue doing other things until the request completes.
