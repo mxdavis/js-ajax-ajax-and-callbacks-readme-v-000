@@ -118,7 +118,7 @@ Ajax follows an asynchronous pattern which makes them non-blocking. This means w
 To make this concept stick, let's look at a real world example. When you put food into a microwave, you don't stand there and wait for the food to finish cooking. You probably pick up your phone, look at Instagram, read some text messages and of course, work on [Learn](https://learn.co). Basically, you are doing other things while the microwave takes care of cooking your food. When the food is cooked, the microwave beeps and you remove the food and eat it. This final step of removing the food and eating it is exactly how our callbacks work. One thing to note, as we wait for our food, we don't check if its done every 5 seconds, we wait until the beep tells us it's done. Checking every 5 seconds is called polling where waiting for the beep is a callback.
 
 ## Handling Problems
-So far, we have been dealing with succesful API requests. But things don't always go according to plan.  What happens if the API we are using doesn't respond? Or if we attempt to retrieve a resource that doesn't exist?
+So far, we have been dealing with successful API requests. But things don't always go according to plan.  What happens if the API we are using doesn't respond? Or if we attempt to retrieve a resource that doesn't exist?
 
 This can happen when API requests are based on user input.  Let's go back to the GitHub API where we are retrieving commits.  Imagine we want to retrieve a specific commit using a SHA.
 
