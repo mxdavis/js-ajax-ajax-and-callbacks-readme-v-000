@@ -33,7 +33,7 @@ Once the request finishes, Postman will display the results.  Does this format l
 
 GitHub exposes a way for us to do this using HTML parameters.  By changing the URL slightly to include the `author` parameter, we can ask the GitHub API to return only the commits made by DHH (bonus points if you know who this is!).
 
-Let's add ```?author=DHH``` to the end of the url and see how the results change.
+Let's add `?author=DHH` to the end of the url and see how the results change.
 
 Go back to Postman and perform the following:
 
@@ -57,17 +57,15 @@ For the purpose of this lesson, we are mostly concerned with web APIs.  But the 
 
 > In computer programming, an application programming interface (API) is a set of routines, protocols, and tools for building software and applications. - Wikipedia
 
-In its simplest form, an API in relation to Object Oriented programming is a class and the list of methods we define.  When creating a class, we are defining a guidebook on how to interact with other parts of the code.  We get to decide which methods and variables are public or private, essentially controlling how to interact with the class.  When we apply this concept to the web, we get web APIs like the GitHub API and Twitter API. From our Postman experiment, we saw how GitHub provides a way for us interact with the data on their system. Just like how a class provides a set of public methods to interact with, web APIs provide us with urls. The list of urls that GitHub provides on https://developer.github.com/v3 act as the public methods into their system.  The developers that created the API control which resources they want to share and who has access to them. 
+In its simplest form, an API in relation to Object Oriented programming is a class and the list of methods we define.  When creating a class, we are defining a guidebook on how to interact with other parts of the code.  We get to decide which methods and variables are public or private, essentially controlling how to interact with the class.  When we apply this concept to the web, we get web APIs like the GitHub API and Twitter API. From our Postman experiment, we saw how GitHub provides a way for us interact with the data on their system. Just like how a class provides a set of public methods to interact with, web APIs provide us with urls. The list of urls that GitHub provides on https://developer.github.com/v3 act as the public methods into their system.  The developers that created the API control which resources they want to share and who has access to them. In the end it's all just the same data available from GitHub. The big difference is the GitHub API is just data and not the HTML/CSS/JavaScript which is the only thing our applications need.
 
 ## Ajax
 
-*** SOMETHING HERE to make it flow better ***
-
-Asynchrounous Javascript and XML (Ajax) is a technique that is used in web applications.  It provides a way for content to be retrieved from a server and displayed without having to refresh the entire page.  Remember in your **blank application** where you had to create a list of **objects**?  Each time we filled out the form and clicked on **create**, the web browser would have to refresh the entire page to see the results sent back from our server.
+Wouldn't it be nice if page refreshes didn't exist? What if we could do multiple things at once from a single web page? In a perfect world we could type into a search textbox and have searches being performed in the background as we type. That world is here and it's called Ajax! Asynchrounous Javascript and XML (Ajax) is a technique that is used in web applications.  It provides a way for content to be retrieved from a server and displayed without having to refresh the entire page.  Remember in your blog application from previous labs when you had to create a list of posts?  Each time we filled out the form and clicked on **create**, the web browser would have to refresh the entire page to see the results sent back from our server.
 
 Single page applications provide a better user experience by allowing users to manipulate data on the server and see the results without having to refresh the page.  This is the power of Ajax in action.  In the background, requests are made to a web API using JavaScript.  As developers we can then choose to alter the displayed HTML based on the responses from the web API.
 
-Let's try an example. To start, create a folder on your computer called ```example```. Inside that folder create another folder called ```html```. Now create a file named ```index.html```, ```script.js``` and ```html/sentence.html```. Finally add the following to each file.
+Let's try an example. To start, create a folder on your computer called `example`. Inside that folder create another folder called `html`. Now create a file named `index.html`, `script.js` and `html/sentence.html`. Finally add the following to each file.
 
 #### index.html
 ```html
@@ -108,14 +106,14 @@ Using your terminal run the following command from inside the examples folder.
 $ python -m SimpleHTTPServer
 ```
 
-This starts a simple server that will serve our files over HTTP. Browse to [http://localhost:8000](http://localhost:8000/) and watch as the Ajax request is made and the new data is added to our web page. Pretty cool! We used the power of Ajax to load data from the ```html/sentence.html```. This same idea can be applied to calling the GitHub API or our Rails application.
+This starts a simple server that will serve our files over HTTP. Browse to [http://localhost:8000](http://localhost:8000/) and watch as the Ajax request is made and the new data is added to our web page. Pretty cool!  We used the power of Ajax to load data from the `html/sentence.html`. This same idea can be applied to calling the GitHub API or our Rails application. This might all happen too quick to really notice anything so you may want to have your terminal window side by side with the browser window. This way you can see the request hit our server.
 
 ##Callbacks
-Ajax follows an asynchronous pattern which makes them non-blocking. This means we don't sit around and wait for the request to finish before running the rest of our code. We set callbacks and then fire and forget. When the request is complete, the callbacks are responsible for deciding what to do with the returned data.
-
 If we look at our last example, the Ajax request completed very quick but this won't always be the case. If we request data from a slow server over a slow internet connection, it might take multiple seconds to get a response. Using a callback allows our code to make our request and continue doing other things until the request completes.
 
-To make this concept stick, let's look at a real world example. When you put food into a microwave, you don't stand there and wait for the food to finish cooking. You probably pick up your phone, look at Instagram, read some text messages and of course, work on [Learn](https://learn.co). Basically, you are doing other things while the microwave takes care of cooking your food. When the food is cooked, the microwave beeps and you remove the food and eat it. This final step of removing the food and eating it is exactly how our callbacks work.
+Ajax follows an asynchronous pattern which makes them non-blocking. This means we don't sit around and wait for the request to finish before running the rest of our code. We set callbacks and then fire and forget. When the request is complete, the callbacks are responsible for deciding what to do with the returned data.
+
+To make this concept stick, let's look at a real world example. When you put food into a microwave, you don't stand there and wait for the food to finish cooking. You probably pick up your phone, look at Instagram, read some text messages and of course, work on [Learn](https://learn.co). Basically, you are doing other things while the microwave takes care of cooking your food. When the food is cooked, the microwave beeps and you remove the food and eat it. This final step of removing the food and eating it is exactly how our callbacks work. One thing to note, as we wait for our food, we don't check if its done every 5 seconds, we wait until the beep tells us it's done. Checking every 5 seconds is called polling where waiting for the beep is a callback.
 
 ## Handling Problems
 So far, we have been dealing with succesful API requests. But things don't always go according to plan.  What happens if the API we are using doesn't respond? Or if we attempt to retrieve a resource that doesn't exist?
@@ -142,11 +140,10 @@ $.get("this_doesnt_exist.html", function(data) {
 });
 ```
 
-We chained an additional call to ```fail``` on the end of our request. We passed a function to the method which will run only if an error occurs. In our example we logged the error to the console, but in real world situation you might want to try to fix the issue or inform the user.
+We chained an additional call to `fail` on the end of our request. We passed a function to the method which will run only if an error occurs. In our example we logged the error to the console, but in real world situation you might want to try to fix the issue or inform the user.
 
 This is another example of how we could use jQuery to perform an Ajax request.
 
-**without passing it an argumnet- gets it automagically**
 ```javascript
 var url = "https://api.github.com/repos/rails/rails/commits?sha=82885325e04d78fb7ec608a4670164d842d23078";
 
@@ -163,5 +160,3 @@ Note: The callback that gets passed into `.done`  gets `data` as an argument.  `
 ##Resources
 * https://en.wikipedia.org/wiki/Application_programming_interface
 * https://api.jquery.com/jquery.get/
-
-
