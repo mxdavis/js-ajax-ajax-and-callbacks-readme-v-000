@@ -29,7 +29,7 @@ At this point Postman should be loaded and ready to go:
 * Enter **https://api.github.com/repos/rails/rails/commits** in the URL textbox.
 * Click the **Send** button.
 
-Once the request finishes, Postman will display the results.  Does this format look familiar?  If you said JSON then give yourself a pat on the back. What we're looking at is a JSON list of all the commits made to the Rails repository.  Each hash in the array has an author key.  Do you recognize any of the commiters?  If not, let's try to narrow the results returned from the GitHub API.
+Once the request finishes, Postman will display the results.  Does this format look familiar?  If you said JSON (JavaScript Object Notation), then give yourself a pat on the back. What we're looking at is a JSON list of all the commits made to the Rails repository.  Each hash in the array has an author key.  Do you recognize any of the commiters?  If not, let's try to narrow the results returned from the GitHub API.
 
 GitHub exposes a way for us to do this using HTML parameters.  By changing the URL slightly to include the `author` parameter, we can ask the GitHub API to return only the commits made by DHH (bonus points if you know who this is!).
 
@@ -161,3 +161,5 @@ Note: The callback that gets passed into `.done`  gets `data` as an argument.  `
 * https://en.wikipedia.org/wiki/Application_programming_interface
 * https://api.jquery.com/jquery.get/
 <p data-visibility='hidden'>View <a href='https://learn.co/lessons/js-ajax-callbacks-readme' title='Ajax and Callbacks'>Ajax and Callbacks</a> on Learn.co and start learning to code for free.</p>
+
+<p data-visibility='hidden'>View <a href='https://learn.co/lessons/js-ajax-callbacks-readme'>AJAX and Callbacks</a> on Learn.co and start learning to code for free.</p>
