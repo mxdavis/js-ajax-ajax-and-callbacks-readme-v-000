@@ -5,18 +5,18 @@
 - Make a get request using Ajax to append text to a page
 - Explain what a callback is and why Ajax runs asynchronously
 
-## Intro (half done)
+## Intro 
 
 So far, you've been using a gem to access a web API.  Gems are responsible for handling all of the nitty-gritty.  They allow us to easily access/modify the data that's important to us. But what happens if the API we want to use doesn't have an associated gem?  We will need to handle everything ourselves.  If that's the case, we better learn more about what an API really is!
 
-## API Basics (done)
+## API Basics 
 
 We interact with web APIs through a set of urls. Each url defines a resource that we access.  The benefit of using a gem is that we don't have to build these urls ourselves.  The gems wrap the necessary code into neat little packages.  When we ask a gem for data, a gem will make a request to the API, handle the response and parse the data into a format we can use. Instead of relying on the magic of gems let's get our hands dirty.
 
 ### Postman and the GitHub API (done)
 Let's see what's actually happening when a gem makes a request to an API. Ok, but how do we do this without a gem? We could write some ruby code, but let's try using a tool called Postman. Postman is an easy to use Chrome extension that lets us make different web requests.  It easily allows us to interact with web APIs. For our exercise, we are going to work with the GitHub API to retrieve information about the Ruby on Rails GitHub repository. To get started we need to setup Postman.
 
-#### Postman Installation (almost done)
+#### Postman Installation
 
 1. Visit https://www.getpostman.com and install the Chrome extension.
 2. Once you have it installed, open Postman from the Chrome Apps menu.
@@ -49,13 +49,13 @@ github_commits.all(user: 'rails', repo: 'rails')
 github_commits.all(user: 'rails', repo: 'rails', author: 'DHH')
 ```
 
-## Defining API (done)
+## Defining APIs
 
 For the purpose of this lesson, we are mostly concerned with web APIs.  But the term API actually has a more broad meaning.
 
 > In computer programming, an application programming interface (API) is a set of routines, protocols, and tools for building software and applications. - Wikipedia
 
-In its simplest form, an API in relation to Object Oriented programming is a class and the list of methods we define.  When creating a class, we are defining a guidebook on how to interact with other parts of the code.  We get to decide which methods and variables are public or private, essentially controlling how to interact with the class.  When we apply this concept to the web, we get web APIs like the GitHub API and Twitter API. From our Postman experiment, we saw how GitHub provides a way for us interact with the data on their system. Just like how a class provides a set of public methods to interact with, web APIs provide us with urls. The list of urls that GitHub provides on https://developer.github.com/v3 act as the public methods into their system.  The developers that created the API control which resources they want to share and who has access to them. In the end it's all just the same data available from GitHub. The big difference is the GitHub API is just data and not the HTML/CSS/JavaScript which is the only thing our applications need.
+In its simplest form, an API in relation to Object Oriented programming is a class and the list of methods we define.  When creating a class, we are defining a guidebook on how to interact with other parts of the code.  We get to decide which methods and variables are public or private, essentially controlling how to interact with the class.  When we apply this concept to the web, we get web APIs like the GitHub API and Twitter API. From our Postman experiment, we saw how GitHub provides a way for us to interact with the data on their system. Just like how a class provides a set of public methods to interact with, web APIs provide us with urls. The list of urls that GitHub provides on https://developer.github.com/v3 act as the public methods into their system.  The developers that created the API control which resources they want to share and who has access to them. In the end it's all just the same data available from GitHub. The big difference is the GitHub API is just data and not the HTML/CSS/JavaScript which is the only thing our applications need.
 
 ## Ajax
 
@@ -158,6 +158,7 @@ $.get(url)
 Note: The callback that gets passed into `.done`  gets `data` as an argument.  `data` represents the response returned from the API. jQuery handles passing in that `data` object to the callbacks.  This is essential to our fire and forget technique.  We don't have to sit around and wait for the API to give us a response.  Instead, we tell jQuery that when it receives a response to please pass it along to our callbacks so they can handle it accordingly.
 
 ##Resources
+
 * https://en.wikipedia.org/wiki/Application_programming_interface
 * https://api.jquery.com/jquery.get/
 <p data-visibility='hidden'>View <a href='https://learn.co/lessons/js-ajax-callbacks-readme' title='Ajax and Callbacks'>Ajax and Callbacks</a> on Learn.co and start learning to code for free.</p>
