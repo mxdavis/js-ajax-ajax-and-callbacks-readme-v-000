@@ -5,11 +5,11 @@
 - Make a get request using Ajax to append text to a page
 - Explain what a callback is and why Ajax runs asynchronously
 
-## Intro 
+## Intro
 
-So far, you've been using a gem to access a web API.  Gems are responsible for handling all of the nitty-gritty.  They allow us to easily access/modify the data that's important to us. But what happens if the API we want to use doesn't have an associated gem?  We will need to handle everything ourselves.  If that's the case, we better learn more about what an API really is!
+So far, you've been using a gem to access a web API.  Gems allow us to easily access/modify the data that's important to us. But what happens if the API we want to use doesn't have an associated gem?  We will need to handle everything ourselves.  If that's the case, we'd better learn more about what an API really is!
 
-## API Basics 
+## API Basics
 
 We interact with web APIs through a set of urls. Each url defines a resource that we access.  The benefit of using a gem is that we don't have to build these urls ourselves.  The gems wrap the necessary code into neat little packages.  When we ask a gem for data, a gem will make a request to the API, handle the response and parse the data into a format we can use. Instead of relying on the magic of gems let's get our hands dirty.
 
@@ -20,7 +20,7 @@ Let's see what's actually happening when a gem makes a request to an API. Ok, bu
 
 1. Visit https://www.getpostman.com and install the Chrome extension.
 2. Once you have it installed, open Postman from the Chrome Apps menu.
-3. Skip the signup and go straight to the app. 
+3. Skip the signup and go straight to the app.
 
 Great!  Now you're all set up to make your own API requests.  As you know, Rails is a large open source project with thousands of contributors.  Those contributors make a hefty amount of commits.  The GitHub API allows us to retrieve the list of commits made to the Rails repository.
 
@@ -29,7 +29,7 @@ At this point Postman should be loaded and ready to go:
 * Enter **https://api.github.com/repos/rails/rails/commits** in the URL textbox.
 * Click the **Send** button.
 
-Once the request finishes, Postman will display the results.  Does this format look familiar?  If you said JSON (JavaScript Object Notation), then give yourself a pat on the back. What we're looking at is a JSON list of all the commits made to the Rails repository.  Each hash in the array has an author key.  Do you recognize any of the commiters?  If not, let's try to narrow the results returned from the GitHub API.
+Once the request finishes, Postman will display the results.  Does this format look familiar?  If you said JSON (JavaScript Object Notation), then give yourself a pat on the back. What we're looking at is a JSON list of all the commits made to the Rails repository.  Each hash in the array has an author key.  Do you recognize any of the committers?  If not, let's try to narrow the results returned from the GitHub API.
 
 GitHub exposes a way for us to do this using HTML parameters.  By changing the URL slightly to include the `author` parameter, we can ask the GitHub API to return only the commits made by DHH (bonus points if you know who this is!).
 
@@ -62,6 +62,8 @@ In its simplest form, an API in relation to Object Oriented programming is a cla
 Wouldn't it be nice if page refreshes didn't exist? What if we could do multiple things at once from a single web page? In a perfect world we could type into a search textbox and have searches being performed in the background as we type. That world is here and it's called Ajax! Asynchrounous Javascript and XML (Ajax) is a technique that is used in web applications.  It provides a way for content to be retrieved from a server and displayed without having to refresh the entire page.  Remember in your blog application from previous labs when you had to create a list of posts?  Each time we filled out the form and clicked on **create**, the web browser would have to refresh the entire page to see the results sent back from our server.
 
 Single page applications provide a better user experience by allowing users to manipulate data on the server and see the results without having to refresh the page.  This is the power of Ajax in action.  In the background, requests are made to a web API using JavaScript.  As developers we can then choose to alter the displayed HTML based on the responses from the web API.
+
+(Like the GitHub API gem, Ajax is a _library_ for making HTTP requests. The big difference between a gem that makes HTTP requests and a JavaScript library that does the same is that the former makes the requests synchronously, whereas the latter makes the requests asynchronously — one consequence of this difference is that, with JavaScript, that even though the requests still _fire_ in order, they might return out of order.)
 
 Let's try an example. To start, create a folder on your computer called `example`. Inside that folder create another folder called `html`. Now create a file named `index.html`, `script.js` and `html/sentence.html`. Finally add the following to each file.
 
@@ -108,7 +110,7 @@ This starts a simple server that will serve our files over HTTP. You need to sta
 
 Browse to [http://localhost:8000](http://localhost:8000/) and watch as the Ajax request is made and the new data is added to our web page. Pretty cool!  We used the power of Ajax to load data from the `html/sentence.html`. This same idea can be applied to calling the GitHub API or our Rails application. This might all happen too quick to really notice anything so you may want to have your terminal window side by side with the browser window. This way you can see the request hit our server.
 
-##Callbacks
+## Callbacks
 If we look at our last example, the Ajax request completed very quick but this won't always be the case. If we request data from a slow server over a slow internet connection, it might take multiple seconds to get a response. Using a callback allows our code to make our request and continue doing other things until the request completes.
 
 Ajax follows an asynchronous pattern which makes them non-blocking. This means we don't sit around and wait for the request to finish before running the rest of our code. We set callbacks and then fire and forget. When the request is complete, the callbacks are responsible for deciding what to do with the returned data.
@@ -133,14 +135,15 @@ A good developer will make sure to handle these unexpected events gracefully whe
 ```javascript
 $.get("this_doesnt_exist.html", function(data) {
   // This will not be called because the .html file request doesn't exist
-})
-.fail(function(error) {
+}).fail(function(error) {
   // This is called when an error occurs
   console.log('Something went wrong: ' + error);
 });
 ```
 
 We chained an additional call to `fail` on the end of our request. We passed a function to the method which will run only if an error occurs. In our example we logged the error to the console, but in real world situation you might want to try to fix the issue or inform the user.
+
+Note that it doesn't matter what you call `data` and `error` in the above examples — the only thing that matters is the order of the arguments. In the callback to `get()`, the first argument is going to be the data that the server sent back, so it makes sense to call it `data` — but we could just as well call it `response`. Similarly, the first argument to `fail()`'s callback is an error object, so we should probably give it a descriptive name like `error` (but we don't have to!).
 
 This is another example of how we could use jQuery to perform an Ajax request.
 
@@ -157,7 +160,7 @@ $.get(url)
 
 Note: The callback that gets passed into `.done`  gets `data` as an argument.  `data` represents the response returned from the API. jQuery handles passing in that `data` object to the callbacks.  This is essential to our fire and forget technique.  We don't have to sit around and wait for the API to give us a response.  Instead, we tell jQuery that when it receives a response to please pass it along to our callbacks so they can handle it accordingly.
 
-##Resources
+## Resources
 
 * https://en.wikipedia.org/wiki/Application_programming_interface
 * https://api.jquery.com/jquery.get/
