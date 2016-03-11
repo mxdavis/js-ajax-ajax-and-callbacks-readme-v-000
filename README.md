@@ -7,11 +7,15 @@
 
 ## Intro
 
-So far, you've been using a gem to access a web API.  Gems allow us to easily access/modify the data that's important to us. But what happens if the API we want to use doesn't have an associated gem?  We will need to handle everything ourselves.  If that's the case, we'd better learn more about what an API really is!
+So far, you've been using a gem to access a web API.  Gems allow us to easily access/modify the data that's important to us. But what happens if the API we want to use doesn't have an associated gem?  We will need to handle everything ourselves. If that's the case, we'd better learn more about what an API really is!
 
 ## API Basics
 
-We interact with web APIs through a set of urls. Each url defines a resource that we access.  The benefit of using a gem is that we don't have to build these urls ourselves.  The gems wrap the necessary code into neat little packages.  When we ask a gem for data, a gem will make a request to the API, handle the response and parse the data into a format we can use. Instead of relying on the magic of gems let's get our hands dirty.
+We interact with web APIs through a set of urls. Each url defines a resource that we access.  The benefit of using a gem is that we don't have to build these urls ourselves.  The gems wrap the necessary code into neat little packages.  When we ask a gem for data, a gem will make a request to the API, handle the response and parse the data into a format we can use.
+
+Gems can either wrap a library for making generic requests — like [Faraday](https://github.com/lostisland/faraday) — or they can wrap requests to a specific API, like the [twitter gem](https://github.com/sferik/twitter).
+
+Instead of relying on the magic of gems let's get our hands dirty.
 
 ### Postman and the GitHub API (done)
 Let's see what's actually happening when a gem makes a request to an API. Ok, but how do we do this without a gem? We could write some ruby code, but let's try using a tool called Postman. Postman is an easy to use Chrome extension that lets us make different web requests.  It easily allows us to interact with web APIs. For our exercise, we are going to work with the GitHub API to retrieve information about the Ruby on Rails GitHub repository. To get started we need to setup Postman.
