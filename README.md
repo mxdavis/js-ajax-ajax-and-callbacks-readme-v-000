@@ -38,7 +38,7 @@ Let's add `?author=jeresig` to the end of the url and see how the results change
 
 Go back to Postman and perform the following:
 
-* Enter **https://api.github.com/repos/rails/rails/commits?author=jeresig**
+* Enter **https://api.github.com/repos/jquery/jquery/commits?author=jeresig**
 * Click the **Send** button.
 
 As you can see, getting data from an API is pretty easy. But we haven't really said what an API is.
@@ -190,3 +190,5 @@ Note: The callback that gets passed into `.done`  gets `data` as an argument. `d
 
 
 <p data-visibility='hidden'>View <a href='https://learn.co/lessons/js-ajax-callbacks-readme'>AJAX and Callbacks</a> on Learn.co and start learning to code for free.</p>
+
+<p class='util--hide'>View <a href='https://learn.co/lessons/js-ajax-callbacks-readme'>AJAX and Callbacks</a> on Learn.co and start learning to code for free.</p>
